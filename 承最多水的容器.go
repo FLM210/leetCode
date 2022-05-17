@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	height := []int{2, 3, 4, 5, 18, 17, 6}
@@ -8,39 +10,20 @@ func main() {
 }
 
 func maxArea(height []int) int {
-	i, j := 1, len(height)
-	area := 0
-	if height[i-1] < height[j-1] {
-		for i != j {
-			if height[i-1] < height[j-1] {
-				tmp := (j - i) * height[i-1]
-				if tmp > area {
-					area = tmp
-				}
-			} else {
-				tmp := (j - i) * height[j-1]
-				if tmp > area {
-					area = tmp
-				}
-			}
+	i, j := 0, len(height)-1
+	area, tmp := 0, 0
+
+	for i != j {
+		if height[i] < height[j] {
+			tmp = (j - i) * height[i]
 			i++
-		}
-	} else {
-		for j != i {
-			if height[i-1] < height[j-1] {
-				tmp := (j - i) * height[i-1]
-				if tmp > area {
-					area = tmp
-				}
-			} else {
-				tmp := (j - i) * height[j-1]
-				if tmp > area {
-					area = tmp
-				}
-			}
+		} else {
+			tmp = (j - i) * height[j]
 			j--
 		}
+		if area < tmp {
+			area = tmp
+		}
 	}
-
 	return area
 }
