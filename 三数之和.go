@@ -10,29 +10,34 @@ import (
 )
 
 func main() {
-	nums := []int{1, 0, 1, 2, -1, -4}
-	fmt.Println(threeSum(nums))
+	nums := []int{0, 0, 0, 0}
+	threeSum(nums)
 
 }
 
 func threeSum(nums []int) [][]int {
 	result := [][]int{}
 	sort.Ints(nums)
-	i := 0
-	for i < len(nums)-2 {
+	for i := 0; i < len(nums)-2; i++ {
 		j, k := i+1, len(nums)-1
-		for j != k {
+		for j < k {
 			n1, n2, n3 := nums[j], nums[k], nums[i]
 			if n1+n2+n3 == 0 {
-				result = append(result, []int{n1, n2, n3})
+				result = append(result, []int{n3, n1, n2})
+				for j < k && nums[j] == n1 {
+					j++
+				}
+				for j < k && nums[k] == n2 {
+					k--
+				}
 			} else if n1+n2+n3 > 0 {
-				k = k - 1
+				k--
 			} else {
-				j = j + 1
+				j++
 			}
 		}
-		i++
 	}
+	fmt.Println(result)
 	return result
 }
 
