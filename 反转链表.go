@@ -7,6 +7,7 @@ type ListNode struct {
 
 func main() {
 }
+
 func reverseList(head *ListNode) *ListNode {
 	var pre *ListNode
 	for head != nil {
